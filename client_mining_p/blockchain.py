@@ -147,12 +147,13 @@ def mine():
     # Client will send a proof and here we validate wheather that proof matches
     # Not sure what id is used for yet
     data = request.get_json(force=True)
+    print(data["proof"])
 
-
-    if data["id"] and data["proof"] == "yes":
+    if data["id"] and data["proof"] == blockchain.last_block["proof"]:
         response = {
             "success": "yes"
         }
+        return jsonify(response), 200
     else:
         response = {
             "message": "Not valid"
