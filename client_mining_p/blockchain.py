@@ -146,20 +146,22 @@ def mine():
 
     # Client will send a proof and here we validate wheather that proof matches
     # Not sure what id is used for yet
-    data = request.get_json()
+    data = request.get_json(force=True)
 
 
-    # if data["id"] and data["proof"]:
-    #     pass
-    # else:
-    #     response = {
-    #         "message": "Not valid"
-    #     }
-    #     return jsonify(response), 400
-    response = {
-        "testing": "hello"
-    }
-    return jsonify(response), 400
+    if data["id"] and data["proof"] == "yes":
+        response = {
+            "success": "yes"
+        }
+    else:
+        response = {
+            "message": "Not valid"
+        }
+        return jsonify(response), 400
+    # response = {
+    #     "testing": "hello"
+    # }
+    # return jsonify(response), 400
     
     return jsonify(response), 200
 
